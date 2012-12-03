@@ -1,0 +1,44 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {margin-bottom: 2px;}
+h5 {margin-top: 2px;}
+
+.apptitle:link {color:black; text-decoration:none}
+.apptitle:visited {color:black; text-decoration:none}
+.apptitle:active {color:black; text-decoration:underline}
+.apptitle:hover {color:black; text-decoration:none}
+
+.thumb {max-width: 320px; max-height: 240px;}
+
+.header {
+  text-color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.link:link {color:black; text-decoration:none}
+.link:visited {color:black; text-decoration:none}
+.link:active {color:black; text-decoration:underline}
+.link:hover {color:blue; text-decoration:none}
+
+.link {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.footer {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: white;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+.text {
+  height: 12px;
+  width: 40px;
+}

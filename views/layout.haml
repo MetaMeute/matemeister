@@ -1,0 +1,21 @@
+!!! 5
+%html
+  %head
+    %link(type='text/css' rel='stylesheet' href="#{url('/css/style.css')}")
+    %script(type='text/javascript' src="#{url('/js/script.js')}")
+    %title MetaMeute MateMeister
+  %body
+    #header
+      %a(class='apptitle' href="#{url '/'}")
+        %h1 MetaMeute MateMeister
+      %h5 Bierstrichliste v2.0
+      %a(class='header link' href="#{url('/users')}")Meuterer
+      %a(class='header link' href="#{url('/drinks')}")Drinks
+      %a(class='header link' href="#{url('/log')}")Log
+    #content
+      =yield
+    #footer
+      %br
+      %br
+      %div
+        %span(class='footer link')© 2012 Anton Pirogov
