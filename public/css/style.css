@@ -3,6 +3,11 @@ body {
   text-align: center;
 }
 
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 h1 {margin-bottom: 2px;}
 h5 {margin-top: 2px;}
 
@@ -23,6 +28,9 @@ h5 {margin-top: 2px;}
 .link:visited {color:black; text-decoration:none}
 .link:active {color:black; text-decoration:underline}
 .link:hover {color:blue; text-decoration:none}
+
+.drink:link {color:blue; text-decoration:none}
+.drink:visited {color:blue; text-decoration:none}
 
 .link {
   margin-top: 10px;

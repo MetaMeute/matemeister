@@ -1,2 +1,85 @@
 - @users = $b.users
-%div= @users
+%table
+  %tr(style="text-align: left;")
+    %th Name
+    %th Bilanz
+  - @users.each do |u|
+    %tr(style="text-align: left;")
+      %td= u[0]
+      %td= ("%.2f" % (u[2].to_f/100))
+      %td
+        %a(class="drink" href="#{url('/user/'+u[0]+'/drink/1')}") trink
+
+%br
+%h3 Aktionen
+
+%table(style="text-align: right;")
+  %tr
+    %form(action="#{url'/'}" method="post")
+      %td
+        %select(name="username")
+          %option(value="")(leer)
+          - @users.sort_by{|u| u[0]}.each do |u|
+            %option(value="#{u[0]}")= u[0]
+      %td
+        Anzahl:
+        %input(type="text" size="3" name="num" value="1")
+      %td
+        %select(name="p")
+          - $b.drinks.each do |d|
+            %option(value="#{d[0]}")= d[0]
+      %td
+        %input(type="submit" value="Trink")
+        %input(hidden="hidden" type="text" name="action" value="drink")
+  %tr
+    %form(action="#{url'/'}" method="post")
+      %td
+        %select(name="username")
+          %option(value="")(leer)
+          - @users.sort_by{|u| u[0]}.each do |u|
+            %option(value="#{u[0]}")= u[0]
+      %td
+        Einheiten:
+        %input(type="text" size="3" name="num" value="0")
+      %td
+      %td
+        %input(type="submit" value="Zahl")
+        %input(hidden="hidden" type="text" name="action" value="pay")
+  %tr
+    %td &nbsp;
+  %tr
+    %form(action="#{url'/'}" method="post")
+      %td
+        %select(name="username")
+          %option(value="")(leer)
+          - @users.sort_by{|u| u[0]}.each do |u|
+            %option(value="#{u[0]}")= u[0]
+      %td
+        Einheiten:
+        %input(type="text" size="3" name="num" value="0")
+      %td
+        An:
+        %select(name="p")
+          %option(value="")(leer)
+          - @users.sort_by{|u| u[0]}.each do |u|
+            %option(value="#{u[0]}")= u[0]
+      %td
+        %input(type="submit" value="Transfer")
+        %input(hidden="hidden" type="text" name="action" value="transfer")
+  %tr
+    %td &nbsp;
+  %tr
+    %form(action="#{url'/'}" method="post")
+      %td
+        %input(type="text" size="10" name="username" value="")
+      %td
+        ID:
+        %input(type="text" size="6" name="num" value="0")
+      %td
+      %td
+        %button(type="submit")
+          Aufnehmen
+          %br
+          ID ändern
+        %input(hidden="hidden" type="text" name="action" value="setid")
+

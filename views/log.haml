@@ -1,2 +1,7 @@
 - @logs = $b.get_log
-%div= @logs
+%table
+  - @logs.reverse.each do |log|
+    %tr
+      %td= Time.at(log[0]).strftime("<strong>%d.%m.%y %H:%M</strong>: ")
+      %td(style="text-align: left;")= log[1]
+

@@ -1,2 +1,68 @@
 - @drinks = $b.drinks
-%div= @drinks
+%table
+  %tr(style="text-align: left;")
+    %th Name
+    %th Lager
+    %th Preis
+  - @drinks.each do |d|
+    %tr(style="text-align: left;")
+      %td= d[0]
+      %td= d[1]
+      %td= ("%.2f" % (d[2].to_f/100))
+
+%br
+%h3 Aktionen
+
+%table(style="text-align: right;")
+  %tr
+    %form(action="#{url'/drink'}" method="post")
+      %td
+        %select(name="drink")
+          %option(value="")(leer)
+          - @drinks.sort_by{|d| d[0]}.each do |d|
+            %option(value="#{d[0]}")= d[0]
+      %td
+        Anzahl:
+        %input(type="text" size="3" name="p" value="0")
+      %td
+        %input(type="submit" value="Aufstocken")
+        %input(hidden="hidden" type="text" name="action" value="addstock")
+  %tr
+    %form(action="#{url'/drink'}" method="post")
+      %td
+        %select(name="drink")
+          %option(value="")(leer)
+          - @drinks.sort_by{|d| d[0]}.each do |d|
+            %option(value="#{d[0]}")= d[0]
+      %td
+        Preis:
+        %input(type="text" size="3" name="p" value="0")
+      %td
+        %input(type="submit" value="Setzen")
+        %input(hidden="hidden" type="text" name="action" value="setprice")
+
+  %tr
+    %td &nbsp;
+  
+  %tr
+    %form(action="#{url'/drink'}" method="post")
+      %td
+      %td
+        Name:
+        %input(type="text" size="10" name="drink" value="")
+      %td
+        %button(type="submit") Getränk anlegen
+        %input(hidden="hidden" type="text" name="action" value="setprice")
+        %input(hidden="hidden" type="text" size="6" name="p" value="100")
+  %tr
+    %form(action="#{url'/drink'}" method="post")
+      %td
+      %td
+        %select(name="drink")
+          %option(value="")(leer)
+          - @drinks.sort_by{|d| d[0]}.each do |d|
+            %option(value="#{d[0]}")= d[0]
+      %td
+        %button(type="submit") Getränk entfernen
+        %input(hidden="hidden" type="text" name="action" value="rmdrink")
+
