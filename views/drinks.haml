@@ -54,15 +54,16 @@
         %button(type="submit") Getränk anlegen
         %input(hidden="hidden" type="text" name="action" value="setprice")
         %input(hidden="hidden" type="text" size="6" name="p" value="100")
-  %tr
-    %form(action="#{url'/drink'}" method="post")
-      %td
-      %td
-        %select(name="drink")
-          %option(value="")(leer)
-          - @drinks.sort_by{|d| d[0]}.each do |d|
-            %option(value="#{d[0]}")= d[0]
-      %td
-        %button(type="submit") Getränk entfernen
-        %input(hidden="hidden" type="text" name="action" value="rmdrink")
+  - if @drinks.length>1
+    %tr
+      %form(action="#{url'/drink'}" method="post")
+        %td
+        %td
+          %select(name="drink")
+            %option(value="")(leer)
+            - @drinks.sort_by{|d| d[0]}.each do |d|
+              %option(value="#{d[0]}")= d[0]
+        %td
+          %button(type="submit") Getränk entfernen
+          %input(hidden="hidden" type="text" name="action" value="rmdrink")
 

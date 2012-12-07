@@ -1,1 +1,3 @@
 Die neue Bierstrichliste!
+
+braucht: ruby, sinatra, haml, sqlite3

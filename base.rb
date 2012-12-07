@@ -93,9 +93,9 @@ class Base
 
     v = get_balance user
     num.times{ v -= get_price drink }
-    @db.execute "UPDATE users SET balance=#{v} WHERE name='#{user}'"
+    @db.execute "UPDATE users SET balance=#{v}, sum=sum+#{num} WHERE name='#{user}'"
     add_stock(drink,-num,false)
-    log "#{user} trinkt #{num} Flasche(n) #{drink}."
+    log "#{user} trinkt #{num} Flasche#{num>1?'n':''} #{drink}."
     return true
   end
 
@@ -176,7 +176,7 @@ class Base
     num = num.to_i if num.class == String && num.numeric?
     oldstock = get_stock drink
     @db.execute "UPDATE drinks SET stock=#{oldstock+num} WHERE name='#{drink}'"
-    log "Getränk #{drink} mit #{num} Flasche(n) aufgestockt." if l
+    log "Getränk #{drink} mit #{num} Flasche#{num>1?'n':''} aufgestockt." if l
     return true
   end
 
@@ -210,7 +210,7 @@ class Base
   def add_user(user)
     return false if users.map{|u| u[0]}.index(user)
 
-    @db.execute "INSERT INTO users (name, id, balance) VALUES ('#{user}', -1, 0)"
+    @db.execute "INSERT INTO users (name, id, balance, sum) VALUES ('#{user}', -1, 0, 0)"
     log("Wilkommen, #{user}!")
     update_cache
     return true
@@ -229,7 +229,7 @@ end
 #create empty database if not found
 if !File.exists?(DB_PATH)
   SQLite3::Database.new(DB_PATH) do |db|
-    db.execute "CREATE TABLE users (name VARCHAR(32), id INTEGER, balance INTEGER);"
+    db.execute "CREATE TABLE users (name VARCHAR(32), id INTEGER, balance INTEGER, sum INTEGER);"
     db.execute "CREATE TABLE drinks (name VARCHAR(32), stock INTEGER, price INTEGER);"
     db.execute "CREATE TABLE logs (time INTEGER, entry VARCHAR(255));"
     db.execute "INSERT INTO drinks (name, stock, price) VALUES ('mate', 0, 100)"

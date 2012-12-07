@@ -6,8 +6,6 @@
 require 'sinatra'
 require 'haml'
 
-#TODO: add sum of drinks clicked by user for stats
-
 require './base'
 
 $b = Base.new

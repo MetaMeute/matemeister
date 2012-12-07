@@ -3,10 +3,12 @@
   %tr(style="text-align: left;")
     %th Name
     %th Bilanz
+    %th= "\u03a3"
   - @users.each do |u|
     %tr(style="text-align: left;")
       %td= u[0]
       %td= ("%.2f" % (u[2].to_f/100))
+      %td= u[3]
       %td
         %a(class="drink" href="#{url('/user/'+u[0]+'/drink/1')}") trink
 
